@@ -11,10 +11,9 @@ class BigBusTest(unittest.TestCase):
         yday = today - datetime.timedelta(days=1)
         self.assertNotIn(yday, bigbus.dates)
 
-    # def test_1(self):
-    #     machine = CoinMachine()
-    #     coins = machine.dispense(1)
-    #     self.assertEqual([0,0,0,1], coins)
+    def test_11th_day(self):
+        nday = today + datetime.timedelta(days=11)
+        self.assertNotIn(nday, bigbus.dates)
 
     # def test_4(self):
     #     machine = CoinMachine()
