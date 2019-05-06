@@ -9,14 +9,17 @@ class BigBusTest(unittest.TestCase):
 
     def test_yesterday(self):
         yday = today - datetime.timedelta(days=1)
+        yday = yday.strftime('%m/%d/%Y')
         self.assertNotIn(yday, bigbus.dates)
 
     def test_11day(self):
         nday = today + datetime.timedelta(days=11)
+        nday = nday.strftime('%m/%d/%Y')
         self.assertNotIn(nday, bigbus.dates)
 
     def test_5day(self):
         day = today + datetime.timedelta(days=5)
+        day = day.strftime('%m/%d/%Y')
         self.assertIn(day, bigbus.dates)
 
     # def test_5(self):
