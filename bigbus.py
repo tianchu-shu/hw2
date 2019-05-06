@@ -40,7 +40,6 @@ for i in range(10):
 
 
 
-#
 
 def ask_direction():
     directions_prompt = {
@@ -56,6 +55,7 @@ def ask_direction():
 def main():
     while True:
         print('Welcome to Big Bus Ticket Stand.')
+
         exit()
 
 
@@ -66,6 +66,7 @@ def exit():
     tally_file = open('tally.pkl', 'rb')
     tally = pickle.load(tally_file)
     tally_file.close()
+    print(tally)
     sfile = open('stock.pkl', 'rb')
     stock = pickle.load(sfile)
     sfile.close()
@@ -136,8 +137,7 @@ def ticketvalidate(answers, tally, report):
     date = answers['date']
     route = answers['route']
     if tally[date][route] < sold:
-        raise ValidationError(
-            message='The date and route you want is sold out')  
+        raise Exception('The date and route you want is sold out')  
     else:
         tally[date][route] -= sold
         tally_file = open('tally.pkl', 'wb')

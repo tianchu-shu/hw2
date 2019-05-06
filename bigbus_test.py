@@ -1,4 +1,5 @@
 import bigbus
+import backend
 import unittest
 import datetime
 from datetime import timedelta  
@@ -22,10 +23,15 @@ class BigBusTest(unittest.TestCase):
         day = day.strftime('%m/%d/%Y')
         self.assertIn(day, bigbus.dates)
 
-    # def test_5(self):
-    #     machine = CoinMachine()
-    #     coins = machine.dispense(5)
-    #     self.assertEqual([0,0,1,0], coins)
+    def test_soldout(self):
+        day = today + datetime.timedelta(days=5)
+        day = day.strftime('%m/%d/%Y')
+        answers = {'amount': '4', 'date': day, 'route': 'Green'}
+        tally = backend.tally
+        tally[day]['Green'] = 0
+        bigbus.ticketvalidate(answers, tally, backend.report)
+        self.assertRaises('The date and route you want is sold out')
+
 
     # def test_6(self):
     #     machine = CoinMachine()

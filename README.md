@@ -1,9 +1,4 @@
 # HW2 Big Bus
-
-Today we finish our look at TDD and observe its impact on the activity
-of software design.  We will try to finish the refactoring unit
-today, but it may spill over into next week as well.
-
 ### Instructions for running project
 
 **Preq**
