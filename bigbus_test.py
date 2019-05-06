@@ -29,8 +29,8 @@ class BigBusTest(unittest.TestCase):
         answers = {'amount': '4', 'date': day, 'route': 'Green'}
         tally = backend.tally
         tally[day]['Green'] = 0
-        bigbus.ticketvalidate(answers, tally, backend.report)
-        self.assertRaises('The date and route you want is sold out')
+        with self.assertRaises(ValueError):
+            bigbus.ticketvalidate(answers, tally, backend.report)
 
 
     # def test_6(self):

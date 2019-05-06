@@ -137,7 +137,8 @@ def ticketvalidate(answers, tally, report):
     date = answers['date']
     route = answers['route']
     if tally[date][route] < sold:
-        raise Exception('The date and route you want is sold out')  
+        print('The date and route you want is sold out')
+        raise ValueError  
     else:
         tally[date][route] -= sold
         tally_file = open('tally.pkl', 'wb')
