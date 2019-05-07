@@ -27,6 +27,16 @@ class BigBusTest(unittest.TestCase):
         self.assertIn(day, bigbus.dates)
 
 
+    def test_discount(self):
+        day = today + datetime.timedelta(days=5)
+        day = day.strftime('%m/%d/%Y')
+        answers = {'amount': '4', 'date': day, 'route': 'Green'}
+        total = bigbus.checkout(answers)
+        tprice = bigbus.price[day]
+        amt = 4 * tprice * 0.9
+        self.assertEqual(amt, total)
+
+
     def test_soldout(self):
         day = today + datetime.timedelta(days=5)
         day = day.strftime('%m/%d/%Y')
@@ -53,12 +63,8 @@ class BigBusTest(unittest.TestCase):
         with self.assertRaises(KeyError):
             bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
         
-
  
-    # def test_6(self):
-    #     machine = CoinMachine()
-    #     coins = machine.dispense(6)
-    #     self.assertEqual([0,0,1,1], coins)
+
 
     # def test_10(self):
     #     machine = CoinMachine()
