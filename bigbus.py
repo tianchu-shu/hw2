@@ -66,7 +66,7 @@ def exit():
     tally_file = open('tally.pkl', 'rb')
     tally = pickle.load(tally_file)
     tally_file.close()
-    print(tally)
+
     sfile = open('stock.pkl', 'rb')
     stock = pickle.load(sfile)
     sfile.close()

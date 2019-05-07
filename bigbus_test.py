@@ -38,11 +38,11 @@ class BigBusTest(unittest.TestCase):
 
 
     def test_soldout(self):
-        day = today + datetime.timedelta(days=5)
+        day = today + datetime.timedelta(days=4)
         day = day.strftime('%m/%d/%Y')
-        answers = {'amount': '4', 'date': day, 'route': 'Green'}
+        answers = {'amount': '3', 'date': day, 'route': 'Blue'}
         tally = backend.tally
-        tally[day]['Green'] = 0
+        tally[day]['Blue'] = 0
         with self.assertRaises(ValueError):
             bigbus.ticketvalidate(answers, tally, backend.report)
 
@@ -64,7 +64,13 @@ class BigBusTest(unittest.TestCase):
             bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
         
  
-
+    def test_buy(self):
+        day = today + datetime.timedelta(days=2)
+        day = day.strftime('%m/%d/%Y')
+        answers = {'amount': '2', 'date': day, 'route': 'Red'}
+        l = len(backend.stock)
+        newstock = bigbus.confirm(answers, backend.tally, backend.stock, backend.report)
+        self.assertEqual(len(newstock), l+2)
 
     # def test_10(self):
     #     machine = CoinMachine()
