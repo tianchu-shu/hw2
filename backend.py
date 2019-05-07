@@ -19,7 +19,7 @@ route = {"Red": 5*SEATS, "Blue": 2*SEATS, "Green": 4*SEATS}
 
 
 today = datetime.datetime.now()
-report = {today.strftime('%m/%d/%Y'): {"Red": 1, "Blue": 1, "Green": 0}}
+report = {today.strftime('%m/%d/%Y'): {"Red": 1, "Blue": 2, "Green": 0}}
 output = open('report.pkl', 'wb')
 pickle.dump(report, output)
 output.close()
@@ -46,7 +46,7 @@ output.close()
 
 
 #create some sold tickets in the stock    
-stock = {'c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a': [dates[5],'Red'], 'a1cde9b2-f132-4e0b-b5cb-6668a0c54328': [dates[6], 'Blue']}
+stock = {'71a16ad0-1426-4dfa-943e-76b76cab4202': [today.strftime('%m/%d/%Y'),'Blue'], 'c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a': [dates[5],'Red'], 'a1cde9b2-f132-4e0b-b5cb-6668a0c54328': [dates[6], 'Blue']}
 
 # write tickets stock to a file
 output = open('stock.pkl', 'wb')
