@@ -163,7 +163,7 @@ def confirm_refund(tid, stock, tally):
     if answers:
         date = stock[tid][0]
         route = stock[tid][1]
-        stock[tid] = False
+        del stock[tid]
         tally[date][route] += 1
         tally_file = open('tally.pkl', 'wb')
         pickle.dump(tally, tally_file)
@@ -180,7 +180,7 @@ def check_ticket(stock, tally):
     if tid not in stock:
         print('The ticket number is not valid. Please try again.')
         exit()
-    elif stock[tid][0]:
+    elif stock[tid][0] in dates:
         cstock = confirm_refund(tid, stock, tally)
         sfile = open('stock.pkl', 'wb')
         pickle.dump(cstock, sfile)

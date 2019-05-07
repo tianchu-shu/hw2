@@ -43,13 +43,14 @@ class BigBusTest(unittest.TestCase):
 
             
     def test_refund(self):
-        bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
-        self.assertEqual(445, backend.tally[backend.dates[5]]['Red'])
+        self.assertEqual(177, backend.tally[backend.dates[6]]['Blue'])
+        bigbus.confirm_refund('a1cde9b2-f132-4e0b-b5cb-6668a0c54328', backend.stock, backend.tally)
+        self.assertEqual(178, backend.tally[backend.dates[6]]['Blue'])
 
 
     def test_double_refund(self):
         bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
-        with self.assertRaises(TypeError):
+        with self.assertRaises(KeyError):
             bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
         
 
