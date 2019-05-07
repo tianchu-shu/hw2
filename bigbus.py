@@ -179,9 +179,8 @@ def check_ticket(stock, tally):
     tid = answers['ticket']
     if tid not in stock:
         print('The ticket number is not valid. Please try again.')
-        raise KeyError 
         exit()
-    elif stock[tid][0] in dates:
+    elif stock[tid][0]:
         cstock = confirm_refund(tid, stock, tally)
         sfile = open('stock.pkl', 'wb')
         pickle.dump(cstock, sfile)

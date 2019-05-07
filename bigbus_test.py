@@ -3,6 +3,10 @@ import backend
 import unittest
 import datetime
 from datetime import timedelta  
+from io import StringIO
+from unittest.mock import patch
+
+
 
 today = datetime.datetime.now()
 
@@ -33,12 +37,13 @@ class BigBusTest(unittest.TestCase):
             bigbus.ticketvalidate(answers, tally, backend.report)
 
     def test_unvalid_ticket(self):    
-        with self.assertRaises(ValueError):
-            bigbus.confirm_refund(' ', backend.stock, backend.tally)
+        with self.assertRaises(KeyError):
+            bigbus.confirm_refund('', backend.stock, backend.tally)
 
-    def test_refund(self):
-        bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
-        self.assertEqual(445, backend.tally[backend.dates[5]]['Red'])
+            
+    # def test_refund(self):
+    #     bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
+    #     self.assertEqual(445, backend.tally[backend.dates[5]]['Red'])
 
     # def test_double_refund(self):
     #     bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
