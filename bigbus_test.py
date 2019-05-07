@@ -2,10 +2,7 @@ import bigbus
 import backend
 import unittest
 import datetime
-from datetime import timedelta  
-from io import StringIO
-from unittest.mock import patch
-
+from datetime import timedelta 
 
 
 today = datetime.datetime.now()
@@ -17,15 +14,18 @@ class BigBusTest(unittest.TestCase):
         yday = yday.strftime('%m/%d/%Y')
         self.assertNotIn(yday, bigbus.dates)
 
+
     def test_11day(self):
         nday = today + datetime.timedelta(days=11)
         nday = nday.strftime('%m/%d/%Y')
         self.assertNotIn(nday, bigbus.dates)
 
+
     def test_5day(self):
         day = today + datetime.timedelta(days=5)
         day = day.strftime('%m/%d/%Y')
         self.assertIn(day, bigbus.dates)
+
 
     def test_soldout(self):
         day = today + datetime.timedelta(days=5)
@@ -36,19 +36,23 @@ class BigBusTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             bigbus.ticketvalidate(answers, tally, backend.report)
 
+
     def test_unvalid_ticket(self):    
         with self.assertRaises(KeyError):
             bigbus.confirm_refund('', backend.stock, backend.tally)
 
             
-    # def test_refund(self):
-    #     bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
-    #     self.assertEqual(445, backend.tally[backend.dates[5]]['Red'])
+    def test_refund(self):
+        bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
+        self.assertEqual(445, backend.tally[backend.dates[5]]['Red'])
 
-    # def test_double_refund(self):
-    #     bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
-    #     bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
-    #     self.assertEqual(445, backend.tally[backend.dates[5]]['Red'])
+
+    def test_double_refund(self):
+        bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
+        with self.assertRaises(TypeError):
+            bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
+        
+
  
     # def test_6(self):
     #     machine = CoinMachine()
