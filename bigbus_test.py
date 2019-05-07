@@ -32,7 +32,12 @@ class BigBusTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             bigbus.ticketvalidate(answers, tally, backend.report)
 
-
+     
+    def test_refund(self):
+        bigbus.confirm_refund('c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a', backend.stock, backend.tally)
+        
+        self.assertEqual(445, backend.tally[backend.dates[5]]['Red'])
+ 
     # def test_6(self):
     #     machine = CoinMachine()
     #     coins = machine.dispense(6)

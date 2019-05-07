@@ -19,7 +19,7 @@ route = {"Red": 5*SEATS, "Blue": 2*SEATS, "Green": 4*SEATS}
 
 
 today = datetime.datetime.now()
-report = {'05/06/2019': {"Red": 1, "Blue": 0, "Green": 0}, '05/05/2019': {"Red": 0, "Blue": 1, "Green": 0}}
+report = {today.strftime('%m/%d/%Y'): {"Red": 1, "Blue": 1, "Green": 0}}
 output = open('report.pkl', 'wb')
 pickle.dump(report, output)
 output.close()
@@ -33,7 +33,11 @@ for i in range(10):
 
 tally = {}
 for date in dates:
-    tally[date] = route
+    tally[date] = route.copy()
+
+tally[dates[6]]['Blue'] -= 1
+tally[dates[5]]['Red'] -= 1
+print(tally)
 
 # write tally to a file
 output = open('tally.pkl', 'wb')
@@ -42,7 +46,7 @@ output.close()
 
 
 #create some sold tickets in the stock    
-stock = {'c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a': ['05/01/2019','Red'], 'a1cde9b2-f132-4e0b-b5cb-6668a0c54328': ['05/02/2019', 'Blue']}
+stock = {'c56c67ce-f8dd-4da9-a59c-fb2a02f74c1a': [dates[5],'Red'], 'a1cde9b2-f132-4e0b-b5cb-6668a0c54328': [dates[6], 'Blue']}
 
 # write tickets stock to a file
 output = open('stock.pkl', 'wb')

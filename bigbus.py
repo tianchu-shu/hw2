@@ -77,11 +77,11 @@ def exit():
 
     if today.strftime('%m/%d/%Y') not in report:
         report[today.strftime('%m/%d/%Y')] = {"Red": 0, "Blue": 0, "Green": 0}
-    print(report)
 
     if (direction == 'Buy'):
         buy(stock, tally, report)
     elif (direction == 'Refund'):
+        print(stock)
         check_ticket(stock, tally)
     else:
         write_up(report)
